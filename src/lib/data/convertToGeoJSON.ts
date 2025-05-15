@@ -1,4 +1,4 @@
-import type { Location } from "./spotsData";
+import type { Location } from "../types";
 
 export function convertToGeoJSON(spots: Location[]): GeoJSON.FeatureCollection {
   return {
