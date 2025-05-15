@@ -2,7 +2,13 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          corral: "#f73f79",
+        },
+      },
+    },
   },
   plugins: [],
 };
