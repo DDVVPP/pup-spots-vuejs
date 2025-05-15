@@ -4,14 +4,16 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import AddPinModal from "./AddPinModal.vue";
 
+type Coordinates = {
+  lng: number;
+  lat: number;
+};
+
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 const mapContainer = ref<HTMLElement | null>(null);
 const map = ref();
 
-const selectedCoords = ref<{
-  lng: number;
-  lat: number;
-}>();
+const selectedCoords = ref<Coordinates>();
 const isOpen = ref(false);
 
 onMounted(() => {
@@ -26,7 +28,7 @@ onMounted(() => {
     zoom: 11,
   });
 
-  map.value.on("click", (e) => {
+  map.value.on("click", (e: mapboxgl.MapMouseEvent) => {
     selectedCoords.value = e.lngLat;
     isOpen.value = true;
   });
