@@ -11,7 +11,7 @@ export function addMarker(pin: Location, map: mapboxgl.Map) {
     icon: "ph:map-pin-area-fill",
     width: 30,
     height: 30,
-    color: "#ff6161",
+    color: "#f73f79",
   });
 
   createApp({ render: () => icon }).mount(el);
@@ -26,7 +26,7 @@ export function addMarker(pin: Location, map: mapboxgl.Map) {
     offset: 17,
   }).setHTML(`
     <div class="text-xs w-[200px] flex flex-col gap-y-1">
-      <p class="font-bold text-red-400">${pin.name}</p>
+      <p class="font-bold text-brand-corral">${pin.name}</p>
       <p class="text-slate-600 text-wrap text-[11px]">${pin.address}</p>
     </div>
   `);
