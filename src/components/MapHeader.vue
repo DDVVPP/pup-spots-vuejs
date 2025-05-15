@@ -1,20 +1,34 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Icon as PawPrintIcon } from "@iconify/vue";
+</script>
 
 <template>
-  <header
-    role="banner"
-    className="absolute top-10 left-10 max-sm:right-10 z-40 w-fit bg-white/85 rounded-xl border-brand-corral border shadow-md"
-  >
-    <div className="p-4">
-      <h1
-        className="text-xl text-brand-corral font-semibold flex items-center gap-x-2"
-      >
-        Pup Spots
-        <!-- <PawPrint size="{24}" color="#f87171" weight="duotone" /> -->
-      </h1>
-      <p className="text-xs text-slate-700 mt-1">
-        A map of dog-friendly hangouts across LA
-      </p>
-    </div>
+  <header role="banner" className="map-header">
+    <h1 className="text-xl text-brand-corral font-semibold leading-none">
+      Pup Spots
+    </h1>
+    <PawPrintIcon
+      icon="ph:paw-print-fill"
+      width="26"
+      height="26"
+      color="#f73f79"
+      class="ml-0.5"
+    />
+    <p className="text-xs text-slate-600 leading-tight text-center">
+      A map of dog-friendly hangouts across LA
+    </p>
   </header>
 </template>
+
+<style scoped>
+.map-header {
+  /* --- Base styles --- */
+  @apply absolute top-6 right-6 z-10 w-fit max-w-md px-4 py-2
+         bg-white/95 rounded-xl border-2 border-brand-corral shadow-md shadow-gray-300
+         flex items-center gap-x-2;
+
+  /* --- Smaller screen adjustments --- */
+  @apply max-sm:flex-col max-sm:gap-y-1 max-sm:py-3
+         max-sm:inset-x-6 max-sm:mx-auto;
+}
+</style>
