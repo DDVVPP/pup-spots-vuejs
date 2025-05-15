@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Button from "./ui/Button.vue";
+import Input from "./ui/Input.vue";
+import Select from "./ui/Select.vue";
+</script>
 
 <template>
   <div
@@ -11,25 +15,14 @@
       <p class="text-sm text-gray-600">
         Add a title, description, and category for this pin..
       </p>
-      <label for="title">Title</label>
-      <input placeholder="Elysian Park" class="border p-2 rounded-md" />
-      <label for="notes">Notes</label>
-      <input
-        placeholder="Great views, green, coyotes around"
-        class="border p-2 rounded-md"
+      <Input label="Title" placeholder="Elysian Park" />
+      <Input label="Notes" placeholder="Great views, green, coyotes around" />
+      <Select
+        label="Choose a category"
+        :options="['restaurants', 'bars', 'hikes', 'shops', 'parks', 'cafes']"
       />
-
-      <label for="categories">Choose a category:</label>
-      <select name="categories" id="categories" class="border p-2 rounded-md">
-        <option value="restaurants">Restaurant</option>
-        <option value="bars">Bar</option>
-        <option value="hikes">Hike</option>
-        <option value="shops">Shop</option>
-        <option value="parks">Park</option>
-        <option value="cafes">Cafe</option>
-      </select>
-      <button class="bg-red-300 rounded-md">Add Pin</button>
-      <button class="border-red-500 border rounded-md">Cancel</button>
+      <Button text="Add Pin" />
+      <Button text="Cancel" variant="secondary" />
     </div>
   </div>
 </template>
