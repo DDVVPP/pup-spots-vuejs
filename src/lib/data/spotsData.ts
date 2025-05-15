@@ -9,7 +9,7 @@ type categories =
   | "event"
   | "other";
 
-interface Location {
+export interface Location {
   id: string;
   name: string;
   address: string;
