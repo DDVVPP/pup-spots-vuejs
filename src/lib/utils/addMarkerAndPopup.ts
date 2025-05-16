@@ -26,7 +26,8 @@ export function addMarker(pin: Location, map: mapboxgl.Map) {
     closeOnClick: false,
     offset: 17,
   }).setHTML(`
-  <div class="text-xs flex items-center gap-x-2 max-w-[150px]">
+  <div class="text-xs flex max-w-[170px] gap-y-2 flex-col">
+  <header class="flex items-center gap-x-2">
     <p class="font-bold text-brand-corral leading-tight">${pin.name}</p>
     <div class="flex gap-x-1 items-center">
       ${pin.categories
@@ -49,6 +50,22 @@ export function addMarker(pin: Location, map: mapboxgl.Map) {
           `;
         })
         .join("")}
+      </div>
+    </header>
+
+    <div class="flex gap-3 justify-between">
+      <button onclick="window.dispatchEvent(new CustomEvent('open-modal', { detail: '${
+        pin.id
+      }' }))"
+        class="text-[10px] text-brand-corral underline">
+        See more
+      </button>
+      <button onclick="window.dispatchEvent(new CustomEvent('close-popup-${
+        pin.id
+      }'))"
+        class="text-[10px] text-slate-500 underline">
+        Close
+      </button>
     </div>
   </div>
 `);
@@ -56,8 +73,7 @@ export function addMarker(pin: Location, map: mapboxgl.Map) {
   marker.getElement().addEventListener("mouseenter", () => {
     popup.setLngLat([pin.lng, pin.lat]).addTo(map);
   });
-
-  marker.getElement().addEventListener("mouseleave", () => {
+  window.addEventListener(`close-popup-${pin.id}`, () => {
     popup.remove();
   });
 }
