@@ -1,24 +1,4 @@
-type categories =
-  | "café"
-  | "bar"
-  | "brewery"
-  | "hike"
-  | "restaurant"
-  | "shop"
-  | "park"
-  | "event"
-  | "other";
-
-export interface Location {
-  id: string;
-  name: string;
-  address: string;
-  categories: categories[];
-  lat: number;
-  lng: number;
-  website?: string;
-  photo?: string;
-}
+import type { Location } from "../types";
 
 export const spotsData: Location[] = [
   {
