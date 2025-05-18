@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { spotsData } from "@/lib/data/spotsData";
 import { addMarker } from "@/lib/utils/addMarkerAndPopup";
 import type { PopupRef } from "@/lib/types";
+import { closePopup } from "@/lib/utils/closePopup";
 
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 const mapContainer = ref<HTMLElement | null>(null);
@@ -31,10 +32,7 @@ onMounted(() => {
   // Add Escape key listener once to close the current popup.
   // Avoids adding a new listener for every marker inside addMarker().
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && currentPopup.value) {
-      currentPopup.value.remove();
-      currentPopup.value = null;
-    }
+    if (e.key === "Escape") closePopup(currentPopup);
   });
 });
 </script>
