@@ -1,3 +1,5 @@
+import { type Ref } from "vue";
+
 export type categories =
   | "café"
   | "bar"
@@ -18,3 +20,5 @@ export interface Location {
   website?: string;
   photo?: string;
 }
+
+export type PopupRef = Ref<mapboxgl.Popup | null>;
