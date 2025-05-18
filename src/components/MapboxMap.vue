@@ -5,9 +5,11 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import { spotsData } from "@/lib/data/spotsData";
 import { addMarker } from "@/lib/utils/addMarkerAndPopup";
+import type { PopupRef } from "@/lib/types";
 
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 const mapContainer = ref<HTMLElement | null>(null);
+const currentPopup: PopupRef = ref(null);
 
 onMounted(() => {
   mapboxgl.accessToken = mapboxToken;
@@ -16,14 +18,23 @@ onMounted(() => {
   const map = new mapboxgl.Map({
     container: mapContainer.value,
     style: "mapbox://styles/dvanparijs/cm9rywpj900ht01rmfnwk0y30",
-    center: [-118.2437, 34.0522], // [lng, lat] → Los Angeles
+    center: [-118.2437, 34.0522], // Los Angeles
     zoom: 11,
   });
 
   map.on("load", () => {
     spotsData.forEach((spot) => {
-      addMarker(spot, map);
+      addMarker(spot, map, currentPopup);
     });
+  });
+
+  // Add Escape key listener once to close the current popup.
+  // Avoids adding a new listener for every marker inside addMarker().
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && currentPopup.value) {
+      currentPopup.value.remove();
+      currentPopup.value = null;
+    }
   });
 });
 </script>
