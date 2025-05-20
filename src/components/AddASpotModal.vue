@@ -6,22 +6,51 @@ const emit = defineEmits(["toggleIsOpen"]);
 </script>
 
 <template>
-  <div class="modal-wrapper">
+  <div class="modal-container">
     <div class="modal">
-      <h1 class="text-lg font-semibold mb-2">Add Pup Spot</h1>
-      <p class="text-sm text-gray-600">
-        Add a title, description, and category for this pin..
-      </p>
-      <Input label="Title" placeholder="Elysian Park" />
-      <Input label="Notes" placeholder="Great views, green, coyotes around" />
-      <Select
-        label="Choose a category"
-        :options="['restaurants', 'bars', 'hikes', 'shops', 'parks', 'cafes']"
-      />
+      <h1
+        class="text-lg font-semibold text-brand-corral flex flex-col max-sm-smaller:text-base"
+      >
+        Add Pup Spot
+        <span
+          class="text-sm max-sm-smaller:text-xs text-gray-500 font-normal leading-tight"
+        >
+          Add to inputs below to submit a spot for approval. On submission, your
+          pin will be marked 'pending', until it is approved.
+        </span>
+      </h1>
 
-      <div class="buttons-wrapper">
+      <section class="public-container">
+        <Input label="Name" placeholder="Elysian Park" />
+        <Input label="Address" placeholder="Elysian Park" />
+        <Select
+          label="Add a category"
+          :options="['Restaurants', 'Bars', 'Hikes', 'Shops', 'pPrks', 'Cafes']"
+        />
+      </section>
+
+      <section class="private-container">
+        <p
+          class="text-sm max-sm-smaller:text-xs text-gray-500 font-normal leading-tight"
+        >
+          This section is private and will only be visible on your pins, in your
+          app when logged in.
+        </p>
+        <div class="private-input-container">
+          <Input
+            label="Notes"
+            placeholder="Great views, green, coyotes around"
+          />
+          <Select
+            label="Add a badge"
+            :options="['Want to go', 'Not Keen', 'Loved it!']"
+          />
+        </div>
+      </section>
+
+      <section class="buttons-container">
         <Button
-          text="Submit for Approval"
+          text="Submit Spot"
           @click="emit('toggleIsOpen')"
           class="w-1/2"
         />
@@ -31,19 +60,32 @@ const emit = defineEmits(["toggleIsOpen"]);
           @click="emit('toggleIsOpen')"
           class="w-1/2"
         />
-      </div>
+      </section>
     </div>
   </div>
 </template>
 
 <style scoped>
-.modal-wrapper {
-  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/5 backdrop-blur-sm;
+.modal-container {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/15 backdrop-blur-md;
 }
 .modal {
-  @apply bg-white rounded-lg p-6 max-w-md w-full flex-col flex gap-y-2 shadow-lg border border-pink-950/15;
+  @apply bg-white rounded-2xl px-10 py-8 max-w-md w-full flex-col flex gap-y-7 shadow-lg border border-pink-950/20
+
+  max-sm-smaller:m-8 overflow-y-auto max-h-[90vh] max-sm-smaller:gap-y-5 max-sm-smaller:rounded-xl max-sm-smaller:px-8 max-sm-smaller:py-7;
 }
-.buttons-wrapper {
-  @apply flex justify-between mt-2 gap-x-4 mr-1;
+.public-container {
+  @apply gap-y-3 flex flex-col;
+}
+.private-container {
+  @apply flex flex-col gap-y-2 mt-2;
+}
+.private-input-container {
+  @apply flex flex-col border border-pink-950/15 rounded-lg pb-6 pt-4 gap-y-3 px-6;
+}
+.buttons-container {
+  @apply flex justify-between my-2 gap-x-4 mr-1
+
+  max-sm-smaller:flex-col max-sm-smaller:gap-y-4;
 }
 </style>
