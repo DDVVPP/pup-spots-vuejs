@@ -2,6 +2,7 @@
 import Button from "./ui/Button.vue";
 import Input from "./ui/Input.vue";
 import Select from "./ui/Select.vue";
+const emit = defineEmits(["toggleIsOpen"]);
 </script>
 
 <template>
@@ -23,6 +24,22 @@ import Select from "./ui/Select.vue";
       />
       <Button text="Add Pin" />
       <Button text="Cancel" variant="secondary" />
+
+      <button class="add-a-spot-button" @click="emit('toggleIsOpen')">
+        Submit for Approval
+      </button>
+      <button class="add-a-spot-button" @click="emit('toggleIsOpen')">
+        Cancel
+      </button>
     </div>
   </div>
 </template>
+
+<style scoped>
+.add-a-spot-button-wrapper {
+  @apply absolute top-20 right-7 z-10 w-fit max-w-md max-sm:inset-x-6 max-sm:top-[140px] max-sm:mx-auto;
+}
+.add-a-spot-button {
+  @apply font-medium p-3 px-4 leading-none rounded-xl border-pink-950 text-white bg-brand-corral shadow-[4px_4px_rgba(131,24,67,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px];
+}
+</style>
