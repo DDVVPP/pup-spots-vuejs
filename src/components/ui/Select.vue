@@ -1,31 +1,46 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   label: string;
   options: string[];
+  modelValue?: string[];
 }>();
+
+const emit = defineEmits<{
+  "update:modelValue": [value: string[]];
+}>();
+
+const toggleOption = (option: string) => {
+  const current = props.modelValue || [];
+  if (current.includes(option)) {
+    emit(
+      "update:modelValue",
+      current.filter((item) => item !== option)
+    );
+  } else {
+    emit("update:modelValue", [...current, option]);
+  }
+};
 </script>
 
 <template>
   <div class="flex flex-col gap-y-1">
-    <label
-      :for="label"
-      class="block text-sm max-sm-smaller:text-xs font-medium text-slate-700"
-    >
+    <label class="block text-sm font-medium text-slate-700">
       {{ label }}
     </label>
-    <select
-      :name="label"
-      :id="label"
-      class="border p-2 rounded-md w-full text-xs text-slate-700"
-    >
-      <option
+    <div class="flex flex-col gap-y-1 pl-1">
+      <label
         v-for="option in options"
         :key="option"
-        :value="option"
-        class="text-xs"
+        class="flex items-center gap-x-2 text-sm text-slate-700"
       >
+        <input
+          type="checkbox"
+          :value="option"
+          :checked="modelValue?.includes(option)"
+          @change="() => toggleOption(option)"
+        />
         {{ option }}
-      </option>
-    </select>
+      </label>
+    </div>
   </div>
 </template>
