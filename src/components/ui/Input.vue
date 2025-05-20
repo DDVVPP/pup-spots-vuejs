@@ -2,6 +2,11 @@
 defineProps<{
   label: string;
   placeholder: string;
+  modelValue?: string | null;
+}>();
+
+defineEmits<{
+  "update:modelValue": [value: string | null];
 }>();
 </script>
 
@@ -13,8 +18,13 @@ defineProps<{
       >{{ label }}</label
     >
     <input
+      :id="label"
       :placeholder="placeholder"
       class="placeholder:text-slate-300 text-xs text-slate-600 rounded-md border p-2"
+      @input="
+        $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+      "
+      :value="modelValue"
     />
   </div>
 </template>
