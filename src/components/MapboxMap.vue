@@ -2,6 +2,12 @@
 import { onMounted, ref } from "vue";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import AddPinModal from "./AddPinModal.vue";
+
+type Coordinates = {
+  lng: number;
+  lat: number;
+};
 
 import { spotsData } from "@/lib/data/spotsData";
 import { addMarker } from "@/lib/utils/addMarkerAndPopup";
