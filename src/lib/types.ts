@@ -22,3 +22,11 @@ export interface Location {
 }
 
 export type PopupRef = Ref<mapboxgl.Popup | null>;
+
+export interface AddASpotFormData {
+  name: string;
+  address: string;
+  notes?: string;
+  category: string[];
+  badge?: string[];
+}
