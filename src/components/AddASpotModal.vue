@@ -1,13 +1,40 @@
 <script setup lang="ts">
+import type { AddASpotFormData } from "@/lib/types";
 import Button from "./ui/Button.vue";
 import Input from "./ui/Input.vue";
 import Select from "./ui/Select.vue";
-const emit = defineEmits(["toggleIsOpen"]);
+import { ref } from "vue";
+
+const emit = defineEmits<{
+  handleSubmit: [formData: AddASpotFormData];
+  toggleIsOpen: [isOpen: boolean];
+}>();
+
+const formData = ref<AddASpotFormData>({
+  name: "",
+  address: "",
+  notes: "",
+  category: [],
+  badge: [],
+});
+
+const submittedForm = () => {
+  console.log("submitted");
+  emit("handleSubmit", formData.value);
+  formData.value = {
+    name: "",
+    address: "",
+    notes: "",
+    category: [],
+    badge: [],
+  };
+  emit("toggleIsOpen", false);
+};
 </script>
 
 <template>
   <div class="modal-container">
-    <div class="modal">
+    <form class="modal" @submit.prevent="submittedForm">
       <h1
         class="text-lg font-semibold text-brand-corral flex flex-col max-sm-smaller:text-base"
       >
@@ -21,11 +48,21 @@ const emit = defineEmits(["toggleIsOpen"]);
       </h1>
 
       <section class="public-container">
-        <Input label="Name" placeholder="Elysian Park" />
-        <Input label="Address" placeholder="Elysian Park" />
+        <Input
+          label="Name"
+          placeholder="Elysian Park"
+          v-model="formData.name"
+        />
+        <Input
+          label="Address"
+          placeholder="1234 East Eleanore St., Glendale 20098"
+          value="formData.value.address"
+          v-model="formData.address"
+        />
         <Select
           label="Add a category"
-          :options="['Restaurants', 'Bars', 'Hikes', 'Shops', 'pPrks', 'Cafes']"
+          :options="['Restaurants', 'Bars', 'Hikes', 'Shops', 'Parks', 'Cafes']"
+          v-model="formData.category"
         />
       </section>
 
@@ -40,28 +77,26 @@ const emit = defineEmits(["toggleIsOpen"]);
           <Input
             label="Notes"
             placeholder="Great views, green, coyotes around"
+            v-model="formData.notes"
           />
           <Select
             label="Add a badge"
             :options="['Want to go', 'Not Keen', 'Loved it!']"
+            v-model="formData.badge"
           />
         </div>
       </section>
 
       <section class="buttons-container">
-        <Button
-          text="Submit Spot"
-          @click="emit('toggleIsOpen')"
-          class="w-1/2"
-        />
+        <Button text="Submit Spot" class="w-1/2" type="submit" />
         <Button
           text="Cancel"
           variant="secondary"
-          @click="emit('toggleIsOpen')"
+          @click="emit('toggleIsOpen', false)"
           class="w-1/2"
         />
       </section>
-    </div>
+    </form>
   </div>
 </template>
 

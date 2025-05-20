@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AddASpotModal from "./AddASpotModal.vue";
+import type { AddASpotFormData } from "@/lib/types";
 
 const isOpen = ref(false);
 const toggleIsOpen = () => {
   isOpen.value = !isOpen.value;
+};
+
+const handleSubmit = (formData: AddASpotFormData) => {
+  console.log("formData in HandleSubmit", formData);
 };
 </script>
 
@@ -16,7 +21,7 @@ const toggleIsOpen = () => {
   </div>
 
   <div v-if="isOpen === true">
-    <AddASpotModal @toggleIsOpen="toggleIsOpen" />
+    <AddASpotModal @toggleIsOpen="toggleIsOpen" @handleSubmit="handleSubmit" />
   </div>
 </template>
 
