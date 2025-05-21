@@ -26,7 +26,6 @@ import { Icon as PawPrintIcon } from "@iconify/vue";
   @apply absolute top-6 right-6 z-10 w-fit max-w-md px-4 py-2
          bg-white/95 rounded-xl border-2 border-brand-corral shadow-md shadow-gray-300
          flex items-center gap-x-2;
-
   /* --- Smaller screen adjustments --- */
   @apply max-sm:flex-col max-sm:gap-y-1 max-sm:py-3
          max-sm:inset-x-6 max-sm:mx-auto;
