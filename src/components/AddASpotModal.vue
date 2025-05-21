@@ -102,12 +102,13 @@ const submittedForm = () => {
 
 <style scoped>
 .modal-container {
-  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/15 backdrop-blur-md;
+  @apply absolute inset-0 z-50 flex items-center justify-center bg-black/15 backdrop-blur-md;
 }
 .modal {
-  @apply bg-white rounded-2xl px-10 py-8 max-w-md w-full flex-col flex gap-y-7 shadow-lg border border-pink-950/20
-
-  max-sm-smaller:m-8 overflow-y-auto max-h-[90vh] max-sm-smaller:gap-y-5 max-sm-smaller:rounded-xl max-sm-smaller:px-8 max-sm-smaller:py-7;
+  /* --- Base styles --- */
+  @apply bg-white rounded-2xl px-10 py-8 max-w-md w-full flex-col flex gap-y-7 shadow-lg border border-pink-950/20;
+  /* --- Smaller screen adjustments --- */
+  @apply max-sm-smaller:m-8 overflow-y-auto max-h-[90vh] max-sm-smaller:gap-y-5 max-sm-smaller:rounded-xl max-sm-smaller:px-8 max-sm-smaller:py-7;
 }
 .public-container {
   @apply gap-y-3 flex flex-col;
