@@ -3,6 +3,8 @@ defineProps<{
   label: string;
   placeholder: string;
   modelValue?: string | null;
+  errorMessage?: string;
+  isRequired?: boolean;
 }>();
 
 defineEmits<{
@@ -15,7 +17,8 @@ defineEmits<{
     <label
       :for="label"
       class="text-sm max-sm-smaller:text-xs font-medium text-slate-700"
-      >{{ label }}</label
+      >{{ label
+      }}<span v-if="isRequired" class="font-normal"> (required)</span></label
     >
     <input
       :id="label"
@@ -26,5 +29,8 @@ defineEmits<{
       "
       :value="modelValue"
     />
+    <p v-if="errorMessage" class="text-red-500 text-sm max-sm-smaller:text-xs">
+      {{ errorMessage }}
+    </p>
   </div>
 </template>

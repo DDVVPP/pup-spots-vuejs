@@ -3,6 +3,8 @@ const props = defineProps<{
   label: string;
   options: string[];
   modelValue?: string[];
+  errorMessage?: string;
+  isRequired?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -25,7 +27,7 @@ const toggleOption = (option: string) => {
 <template>
   <div class="flex flex-col gap-y-1">
     <label class="block text-sm font-medium text-slate-700">
-      {{ label }}
+      {{ label }}<span v-if="isRequired" class="font-normal"> (required)</span>
     </label>
     <div class="flex flex-col gap-y-1 pl-1">
       <label
@@ -42,5 +44,8 @@ const toggleOption = (option: string) => {
         {{ option }}
       </label>
     </div>
+    <p v-if="errorMessage" class="text-red-500 text-sm max-sm-smaller:text-xs">
+      {{ errorMessage }}
+    </p>
   </div>
 </template>
