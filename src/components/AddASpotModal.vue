@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { ref, type Ref } from "vue";
 import type { AddASpotFormData } from "@/lib/types";
 import Button from "./ui/Button.vue";
 import Input from "./ui/Input.vue";
 import Select from "./ui/Select.vue";
-import { ref } from "vue";
+import useOutsideClick from "@/composables/useOutsideClick";
+import useEscapeKey from "@/composables/useEscapeKey";
 
+const modalRef = ref<Ref<HTMLDivElement | null> | null>(null);
+useOutsideClick(modalRef, () => {
+  emit("toggleIsOpen", false);
+});
+useEscapeKey(() => emit("toggleIsOpen", false));
 const emit = defineEmits<{
   handleSubmit: [formData: AddASpotFormData];
   toggleIsOpen: [isOpen: boolean];
@@ -19,7 +26,6 @@ const formData = ref<AddASpotFormData>({
 });
 
 const submittedForm = () => {
-  console.log("submitted");
   emit("handleSubmit", formData.value);
   formData.value = {
     name: "",
@@ -34,7 +40,7 @@ const submittedForm = () => {
 
 <template>
   <div class="modal-container">
-    <form class="modal" @submit.prevent="submittedForm">
+    <form ref="modalRef" class="modal" @submit.prevent="submittedForm">
       <h1
         class="text-lg font-semibold text-brand-corral flex flex-col max-sm-smaller:text-base"
       >
@@ -129,8 +135,9 @@ const submittedForm = () => {
   @apply flex flex-col border border-pink-950/15 rounded-lg pb-6 pt-4 gap-y-3 px-6;
 }
 .buttons-container {
-  @apply flex justify-between my-2 gap-x-4 mr-1
-
-  max-sm-smaller:flex-col max-sm-smaller:gap-y-4;
+  /* --- Base styles --- */
+  @apply flex justify-between my-2 gap-x-4 mr-1;
+  /* --- Smaller screen adjustments --- */
+  @apply max-sm-smaller:flex-col max-sm-smaller:gap-y-4;
 }
 </style>
