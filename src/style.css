@@ -30,6 +30,6 @@
   border: 1px solid rgba(156, 163, 175, 0.1);
 }
 .scroll-controller::-webkit-scrollbar-thumb {
-  background-color: theme("colors.gray.200"); /* bg-gray-300 */
+  background-color: theme("colors.gray.300"); /* bg-gray-300 */
   border-radius: theme("borderRadius.xl");
 }
