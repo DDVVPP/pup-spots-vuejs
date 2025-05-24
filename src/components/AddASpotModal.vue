@@ -47,44 +47,53 @@ const submittedForm = () => {
         </span>
       </h1>
 
-      <section class="public-container">
-        <Input
-          label="Name"
-          placeholder="Elysian Park"
-          v-model="formData.name"
-        />
-        <Input
-          label="Address"
-          placeholder="1234 East Eleanore St., Glendale 20098"
-          value="formData.value.address"
-          v-model="formData.address"
-        />
-        <Select
-          label="Add a category"
-          :options="['Restaurants', 'Bars', 'Hikes', 'Shops', 'Parks', 'Cafes']"
-          v-model="formData.category"
-        />
-      </section>
-
-      <section class="private-container">
-        <p
-          class="text-sm max-sm-smaller:text-xs text-gray-500 font-normal leading-tight"
-        >
-          This section is private and will only be visible on your pins, in your
-          app when logged in.
-        </p>
-        <div class="private-input-container">
+      <section class="scroll-controller overflow-y-auto">
+        <section class="public-container">
           <Input
-            label="Notes"
-            placeholder="Great views, green, coyotes around"
-            v-model="formData.notes"
+            label="Name"
+            placeholder="Elysian Park"
+            v-model="formData.name"
+          />
+          <Input
+            label="Address"
+            placeholder="1234 East Eleanore St., Glendale 20098"
+            value="formData.value.address"
+            v-model="formData.address"
           />
           <Select
-            label="Add a badge"
-            :options="['Want to go', 'Not Keen', 'Loved it!']"
-            v-model="formData.badge"
+            label="Add a category"
+            :options="[
+              'Restaurants',
+              'Bars',
+              'Hikes',
+              'Shops',
+              'Parks',
+              'Cafes',
+            ]"
+            v-model="formData.category"
           />
-        </div>
+        </section>
+
+        <section class="private-container">
+          <p
+            class="text-sm max-sm-smaller:text-xs text-gray-500 font-normal leading-tight"
+          >
+            This section is private and will only be visible on your pins, in
+            your app when logged in.
+          </p>
+          <div class="private-input-container">
+            <Input
+              label="Notes"
+              placeholder="Great views, green, coyotes around"
+              v-model="formData.notes"
+            />
+            <Select
+              label="Add a badge"
+              :options="['Want to go', 'Not Keen', 'Loved it!']"
+              v-model="formData.badge"
+            />
+          </div>
+        </section>
       </section>
 
       <section class="buttons-container">
@@ -108,13 +117,13 @@ const submittedForm = () => {
   /* --- Base styles --- */
   @apply bg-white rounded-2xl px-10 py-8 max-w-md w-full flex-col flex gap-y-7 shadow-lg border border-pink-950/20;
   /* --- Smaller screen adjustments --- */
-  @apply max-sm-smaller:m-8 overflow-y-auto max-h-[90vh] max-sm-smaller:gap-y-5 max-sm-smaller:rounded-xl max-sm-smaller:px-8 max-sm-smaller:py-10;
+  @apply max-sm-smaller:m-8  max-h-[90vh] max-sm-smaller:gap-y-5 max-sm-smaller:rounded-xl max-sm-smaller:px-8 max-sm-smaller:py-10;
 }
 .public-container {
-  @apply gap-y-3 flex flex-col;
+  @apply gap-y-3 flex flex-col mr-2;
 }
 .private-container {
-  @apply flex flex-col gap-y-2 mt-2;
+  @apply flex flex-col gap-y-2 mt-2 mr-2;
 }
 .private-input-container {
   @apply flex flex-col border border-pink-950/15 rounded-lg pb-6 pt-4 gap-y-3 px-6;

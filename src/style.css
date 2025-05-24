@@ -20,3 +20,16 @@
     transform: translateY(0);
   }
 }
+
+.scroll-controller::-webkit-scrollbar {
+  width: theme("width.2");
+}
+.scroll-controller::-webkit-scrollbar-track {
+  background-color: theme("colors.gray.100"); /* bg-gray-100 */
+  border-radius: theme("borderRadius.xl");
+  border: 1px solid rgba(156, 163, 175, 0.1);
+}
+.scroll-controller::-webkit-scrollbar-thumb {
+  background-color: theme("colors.gray.200"); /* bg-gray-300 */
+  border-radius: theme("borderRadius.xl");
+}
