@@ -2,7 +2,8 @@
 import { ref, type Ref } from "vue";
 import type { AddASpotFormData } from "@/lib/types";
 import Button from "./ui/Button.vue";
-import Input from "./ui/Input.vue";
+import TextInput from "./ui/TextInput.vue";
+import TextAreaInput from "./ui/TextAreaInput.vue";
 import Select from "./ui/Select.vue";
 import useOutsideClick from "@/composables/useOutsideClick";
 import useEscapeKey from "@/composables/useEscapeKey";
@@ -55,16 +56,20 @@ const submittedForm = () => {
 
       <section class="scroll-controller overflow-y-auto">
         <section class="public-container">
-          <Input
+          <TextInput
             label="Name"
             placeholder="Elysian Park"
             v-model="formData.name"
+            isRequired
+            errorMessage="Don't forget to add a name!"
           />
-          <Input
+          <TextInput
             label="Address"
             placeholder="1234 East Eleanore St., Glendale 20098"
             value="formData.value.address"
             v-model="formData.address"
+            isRequired
+            errorMessage="Hmmm... something is off about this address"
           />
           <Select
             label="Add a category"
@@ -77,6 +82,8 @@ const submittedForm = () => {
               'Cafes',
             ]"
             v-model="formData.category"
+            isRequired
+            errorMessage="Don't forget to add a category!"
           />
         </section>
 
@@ -88,7 +95,7 @@ const submittedForm = () => {
             your app when logged in.
           </p>
           <div class="private-input-container">
-            <Input
+            <TextAreaInput
               label="Notes"
               placeholder="Great views, green, coyotes around"
               v-model="formData.notes"
