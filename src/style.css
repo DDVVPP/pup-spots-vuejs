@@ -33,3 +33,7 @@
   background-color: theme("colors.gray.300"); /* bg-gray-300 */
   border-radius: theme("borderRadius.xl");
 }
+
+.error-message {
+  @apply text-brand-corral text-sm max-sm-smaller:text-xs;
+}

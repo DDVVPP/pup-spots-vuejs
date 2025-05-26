@@ -29,7 +29,7 @@ defineEmits<{
       "
       :value="modelValue"
     />
-    <p v-if="errorMessage" class="text-red-500 text-sm max-sm-smaller:text-xs">
+    <p v-if="errorMessage" class="error-message">
       {{ errorMessage }}
     </p>
   </div>
