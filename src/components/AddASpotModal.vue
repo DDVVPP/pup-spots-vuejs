@@ -13,6 +13,16 @@ import useOutsideClick from "@/composables/useOutsideClick";
 import useEscapeKey from "@/composables/useEscapeKey";
 
 const modalRef = ref<Ref<HTMLDivElement | null> | null>(null);
+const categoryOptions = [
+  "Restaurants",
+  "Bars",
+  "Hikes",
+  "Shops",
+  "Parks",
+  "Cafes",
+];
+const badgeOptions = ["Want to go", "Not Keen", "Loved it!"];
+
 useOutsideClick(modalRef, () => {
   emit("toggleIsOpen", false);
 });
@@ -77,14 +87,7 @@ const onSubmit = handleSubmit((values) => {
           />
           <Select
             label="Add a category"
-            :options="[
-              'Restaurants',
-              'Bars',
-              'Hikes',
-              'Shops',
-              'Parks',
-              'Cafes',
-            ]"
+            :options="categoryOptions"
             v-model="category"
             isRequired
             :errorMessage="categoryError"
@@ -107,7 +110,7 @@ const onSubmit = handleSubmit((values) => {
             />
             <Select
               label="Add a badge"
-              :options="['Want to go', 'Not Keen', 'Loved it!']"
+              :options="badgeOptions"
               v-model="badge"
             />
           </div>
