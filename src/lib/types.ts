@@ -1,4 +1,6 @@
 import { type Ref } from "vue";
+import { type InferType } from "yup";
+import { rawAddSpotSchema } from "./schemas";
 
 export type categories =
   | "café"
@@ -23,10 +25,4 @@ export interface Location {
 
 export type PopupRef = Ref<mapboxgl.Popup | null>;
 
-export interface AddASpotFormData {
-  name: string;
-  address: string;
-  notes?: string;
-  category: string[];
-  badge?: string[];
-}
+export type AddASpotFormData = InferType<typeof rawAddSpotSchema>;
