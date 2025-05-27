@@ -36,6 +36,7 @@ const { value: notes, errorMessage: notesError } =
   useField<AddASpotFormData["notes"]>("notes");
 const { value: category, errorMessage: categoryError } =
   useField<AddASpotFormData["category"]>("category");
+const { value: badge } = useField<AddASpotFormData["badge"]>("badge");
 
 const onSubmit = handleSubmit((values) => {
   emit("handleSubmit", values);
@@ -107,7 +108,7 @@ const onSubmit = handleSubmit((values) => {
             <Select
               label="Add a badge"
               :options="['Want to go', 'Not Keen', 'Loved it!']"
-              v-model="values.badge"
+              v-model="badge"
             />
           </div>
         </section>
