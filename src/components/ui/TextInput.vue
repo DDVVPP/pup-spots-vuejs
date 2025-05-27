@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import FieldError from "./FieldError.vue";
+
 defineProps<{
   label: string;
   placeholder: string;
@@ -23,14 +25,13 @@ defineEmits<{
     <input
       :id="label"
       :placeholder="placeholder"
-      class="placeholder:text-slate-300 text-xs text-slate-600 rounded-md border p-2"
+      class="placeholder:text-slate-300 text-sm text-slate-600 rounded-md border p-2"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
       :value="modelValue"
     />
-    <p v-if="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </p>
+
+    <FieldError :message="errorMessage" />
   </div>
 </template>
