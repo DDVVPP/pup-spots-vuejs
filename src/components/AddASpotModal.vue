@@ -23,7 +23,7 @@ const emit = defineEmits<{
   toggleIsOpen: [isOpen: boolean];
 }>();
 
-const { handleSubmit, values } = useForm<AddASpotFormData>({
+const { handleSubmit } = useForm<AddASpotFormData>({
   validationSchema: addSpotSchema,
   validateOnMount: false,
   initialValues: rawAddSpotSchema.getDefault(),
