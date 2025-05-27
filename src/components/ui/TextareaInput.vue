@@ -25,6 +25,7 @@ defineEmits<{
     >
     <textarea
       :id="label"
+      :name="label"
       :placeholder="placeholder"
       class="placeholder:text-slate-300 text-sm max-sm-smaller:text-xs text-slate-600 rounded-md border p-2"
       @input="

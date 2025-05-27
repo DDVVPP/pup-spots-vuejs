@@ -41,6 +41,7 @@ const toggleOption = (option: string) => {
       >
         <input
           type="checkbox"
+          :name="label"
           :value="option"
           :checked="modelValue?.includes(option)"
           @change="() => toggleOption(option)"

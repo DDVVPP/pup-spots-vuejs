@@ -24,6 +24,7 @@ defineEmits<{
     >
     <input
       :id="label"
+      :name="label"
       :placeholder="placeholder"
       class="placeholder:text-slate-300 text-sm text-slate-600 rounded-md border p-2"
       @input="
