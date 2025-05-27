@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref, type Ref } from "vue";
+import { useForm, useField } from "vee-validate";
+
 import type { AddASpotFormData } from "@/lib/types";
-import Button from "./ui/Button.vue";
-import TextInput from "./ui/TextInput.vue";
-import TextAreaInput from "./ui/TextAreaInput.vue";
-import Select from "./ui/Select.vue";
+import { addSpotSchema, rawAddSpotSchema } from "@/lib/schemas";
+
+import Button from "@/components/ui/Button.vue";
+import TextInput from "@/components/ui/TextInput.vue";
+import TextAreaInput from "@/components/ui/TextareaInput.vue";
+import Select from "@/components/ui/Select.vue";
 import useOutsideClick from "@/composables/useOutsideClick";
 import useEscapeKey from "@/composables/useEscapeKey";
 
@@ -13,35 +17,35 @@ useOutsideClick(modalRef, () => {
   emit("toggleIsOpen", false);
 });
 useEscapeKey(() => emit("toggleIsOpen", false));
+
 const emit = defineEmits<{
-  handleSubmit: [formData: AddASpotFormData];
+  handleSubmit: [values: AddASpotFormData];
   toggleIsOpen: [isOpen: boolean];
 }>();
 
-const formData = ref<AddASpotFormData>({
-  name: "",
-  address: "",
-  notes: "",
-  category: [],
-  badge: [],
+const { handleSubmit, values } = useForm<AddASpotFormData>({
+  validationSchema: addSpotSchema,
+  validateOnMount: false,
+  initialValues: rawAddSpotSchema.getDefault(),
 });
+const { value: name, errorMessage: nameError } =
+  useField<AddASpotFormData["name"]>("name");
+const { value: address, errorMessage: addressError } =
+  useField<AddASpotFormData["address"]>("address");
+const { value: notes, errorMessage: notesError } =
+  useField<AddASpotFormData["notes"]>("notes");
+const { value: category, errorMessage: categoryError } =
+  useField<AddASpotFormData["category"]>("category");
 
-const submittedForm = () => {
-  emit("handleSubmit", formData.value);
-  formData.value = {
-    name: "",
-    address: "",
-    notes: "",
-    category: [],
-    badge: [],
-  };
+const onSubmit = handleSubmit((values) => {
+  emit("handleSubmit", values);
   emit("toggleIsOpen", false);
-};
+});
 </script>
 
 <template>
   <div class="modal-container">
-    <form ref="modalRef" class="modal" @submit.prevent="submittedForm">
+    <form ref="modalRef" class="modal" @submit.prevent="onSubmit">
       <h1
         class="text-lg font-semibold text-brand-corral flex flex-col max-sm-smaller:text-base"
       >
@@ -59,17 +63,16 @@ const submittedForm = () => {
           <TextInput
             label="Name"
             placeholder="Elysian Park"
-            v-model="formData.name"
+            v-model="name"
             isRequired
-            errorMessage="Don't forget to add a name!"
+            :errorMessage="nameError"
           />
           <TextInput
             label="Address"
             placeholder="1234 East Eleanore St., Glendale 20098"
-            value="formData.value.address"
-            v-model="formData.address"
+            v-model="address"
             isRequired
-            errorMessage="Hmmm... something is off about this address"
+            :errorMessage="addressError"
           />
           <Select
             label="Add a category"
@@ -81,9 +84,9 @@ const submittedForm = () => {
               'Parks',
               'Cafes',
             ]"
-            v-model="formData.category"
+            v-model="category"
             isRequired
-            errorMessage="Don't forget to add a category!"
+            :errorMessage="categoryError"
           />
         </section>
 
@@ -98,12 +101,13 @@ const submittedForm = () => {
             <TextAreaInput
               label="Notes"
               placeholder="Great views, green, coyotes around"
-              v-model="formData.notes"
+              v-model="notes"
+              :errorMessage="notesError"
             />
             <Select
               label="Add a badge"
               :options="['Want to go', 'Not Keen', 'Loved it!']"
-              v-model="formData.badge"
+              v-model="values.badge"
             />
           </div>
         </section>
@@ -133,13 +137,13 @@ const submittedForm = () => {
   @apply max-sm-smaller:m-8  max-h-[90vh] max-sm-smaller:gap-y-5 max-sm-smaller:rounded-xl max-sm-smaller:px-8 max-sm-smaller:py-10;
 }
 .public-container {
-  @apply gap-y-3 flex flex-col mr-2;
+  @apply gap-y-1 flex flex-col mr-2;
 }
 .private-container {
-  @apply flex flex-col gap-y-2 mt-2 mr-2;
+  @apply flex flex-col gap-y-2 mr-2 mt-2;
 }
 .private-input-container {
-  @apply flex flex-col border border-pink-950/15 rounded-lg pb-6 pt-4 gap-y-3 px-6;
+  @apply flex flex-col border border-pink-950/15 rounded-lg pb-6 gap-y-1 pt-4 px-6;
 }
 .buttons-container {
   /* --- Base styles --- */
