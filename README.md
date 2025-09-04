@@ -3,13 +3,14 @@
 A curated map of dog-friendly hangouts across Los Angeles, built with **Vue.js**, **Vite**, and **Mapbox GL**.
 
 **[Live Demo](https://pup-spots-vuejs.vercel.app/)**
-
 ---
 
 ## 🧩 Background
 
 This project is a personal rebuild and extension of the original [Pup Spots](https://github.com/DDVVPP/pup-spots) take-home assignment from **Spherical Studio**.  
 That version was built with Next.js and Mapbox GL and used during their hiring process. This version explores a similar concept with a Vue-based stack and new features.
+
+Follow my dev journey at [#darshinpupspots](https://www.linkedin.com/search/results/all/?keywords=%23darshinpupspots&origin=HASH_TAG_FROM_FEED&sid=QnE)
 
 ---
 
